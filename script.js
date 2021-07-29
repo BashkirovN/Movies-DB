@@ -57,7 +57,7 @@ let movieOne  = prompt("One of the movies you watched lately:", ""),
     movieTwo  = prompt("One of the movies you watched lately:", ""),
     movieTwoRate = prompt("How did you like it (1-10)?", "");
 */
-function rateMovies()   {
+function rememberMyFilms()   {
     for (let i = 0; i < 2; i++) {
         let a = prompt("One of the movies you watched lately:", ""),
             b = prompt("How did you like it (1-10)?", "");
@@ -69,14 +69,16 @@ function rateMovies()   {
     }
 }
 
-if (personalMovieDB.count < 10) {
-    console.log("Too few movies");
-} else if (personalMovieDB.count < 30)  {
-    console.log("Good enough");
-}  else if (personalMovieDB.count >= 30)    {   
-    console.log("You are a maniac");
-}   else {
-    console.log("Error");
+function detectPersonalLevel()  {
+    if (personalMovieDB.count < 10) {
+        console.log("Too few movies");
+    } else if (personalMovieDB.count < 30)  {
+        console.log("Good enough");
+    }  else if (personalMovieDB.count >= 30)    {   
+        console.log("You are a maniac");
+    }   else {
+        console.log("Error");
+    }
 }
 /*
     personalMovieDB.movies = {
@@ -85,18 +87,20 @@ if (personalMovieDB.count < 10) {
     };
     */
 
-function showMyDB() {
-    if (!personalMovieDB.private)   {
+function showMyDB(hidden) {
+    if (!hidden)   {
         console.log(personalMovieDB);
     }
 }
 
 function writeYourGenres()  {
     for (let i = 1; i < 4; i ++)    {
-        personalMovieDB.genres[i-1] = prompt(`Your favoritee genre number ${i}`, '');
+        personalMovieDB.genres[i - 1] = prompt(`Your favoritee genre number ${i}`, '');
     }
 }
 
 start();
-rateMovies();
+rememberMyFilms();
 writeYourGenres();
+detectPersonalLevel();
+showMyDB(personalMovieDB.private);
